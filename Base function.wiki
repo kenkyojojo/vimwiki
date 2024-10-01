@@ -1,0 +1,12 @@
+Three Base funciton
+  1. Transmission Group(TGs)
+    * Mutil-Link TG
+      - Common Path Control
+    * Parallel TGs
+      - Separate Path Control
+      
+  2. Network Addressable Unit(NAU)
+    * NAU names must be unique within an APPN environment. To ensure this uniqueness, a consistent naming convention is very important.
+    
+  3. addressing and session identifiters
+    * The address used in an HPR/IP transmission header includes not only the HPR session identifier, but also the IP address of the participating endpoint.

@@ -1,0 +1,14 @@
+9. Create a collaborative directory /home/materials with the following characteristics:
+     Group ownership of /home/materials is sysadms
+     The directory should be readable, writable, and accessible to members of sysadms ,
+     but not to any other user. (It is understood that root has access to all files and directories on the system.)
+     Files created in /home/materials automatically have group ownership set to the sysadms group
+    
+# mkdir /home/materials
+# chgrp sysadms /home/materials
+# chmod 2770 /home/materials
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

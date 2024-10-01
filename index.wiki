@@ -1,0 +1,26 @@
+*[[index|首頁]]*
+
+=My Wiki=
+*[[Target]]* 
+
+=Diary=
+*[[2020-03-31]]*
+
+=Learn=
+a) ==System==
+  - *[[Rhce7_Question| About the EX200 Question]]*
+  - *[[Aix]]*
+  - *[[Zos]]*
+
+b) ==Program==
+  - *[[Bash]]*
+  - *[[C]]*
+  - *[[Ruby]]*
+  - *[[Perl]]*
+  - *[[Python]]*
+  - *[[Rexx]]*
+  - *[[Jcl]]*
+  - *[[Cobol]]*
+   
+c) ==English==
+  - *[[Vocabulary]]*

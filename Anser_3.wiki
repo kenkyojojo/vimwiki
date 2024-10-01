@@ -1,0 +1,15 @@
+3. SELinux must be running in the Enforcing mode.
+
+# vim /etc/selinux/config
+SELINUX=enforcing
+SELINUXTYPE=targeted
+:x!
+
+# getenforce
+
+##重開機後生效
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

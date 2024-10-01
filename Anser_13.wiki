@@ -1,0 +1,26 @@
+13. **Configure autofs to automount the home directories of LDAP users as follows(this is for desktop[VM alias] configuration):
+     classroom.example.com NFS-exports /home/guests to your system. This filesystem contains a pre-configured home directory for the user ldapuserX
+     ldapuserX's home directory is classroom.example.com:/home/guests/ldapuserX
+     ldapuserX's home directory should be automounted locally beneath /netdir as /home/guests/ldapuserX
+     home directories must be writable by their users
+     ldapuserX's password is password.
+    
+# yum -y install autofs
+# vim /etc/auto.master.d/home.autofs
+/home/guests          /etc/auto.home
+:x!
+
+# vim /etc/auto.home
+*               classroom.example.com:/home/guests/&
+:x!
+
+# systemctl restart autofs
+# systemctl enable autofs
+
+使用ldapuser測試，登入後有看到home directory即成功
+# ssh ldapuserX@localhost
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

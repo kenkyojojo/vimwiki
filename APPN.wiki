@@ -1,0 +1,2 @@
+* APPN is aimed at those installations who have decided to run applications in a sysplex environment. 
+* To assist EE in its objective to support current SNA-exploiting functions that exist in a sysplex environment, such as generic resources (GR) and multinode persistent sessions (MNPS), APPN enhances the management of these functions.

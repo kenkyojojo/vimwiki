@@ -1,0 +1,9 @@
+14. Create a user bilbobaggins with a userid of 2112. The password for this user should be GollumRing.
+
+# useradd -u 2112 bilbobaggins
+# echo 'GollumRing' | passwd --stdin bilbobaggins
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

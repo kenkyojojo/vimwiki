@@ -1,0 +1,9 @@
+18. Create a tar archive named /root/archive.tar.gz which contains the content of /usr/local.
+     The tar archive must be compressed using bzip.
+
+# tar -cvjf /root/archive.tar.gz /usr/local
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

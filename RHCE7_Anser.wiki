@@ -1,0 +1,387 @@
+1. root can not login , recovering the root password(RH124 CH13)
+
+reboot , boot loader pressing any key , press e
+linux16那行按End移到最後，輸入rd.break enforcing=0
+Press Ctrl+x to boot with the changes
+#mount -o remount,rw /sysroot
+#chroot /sysroot
+#passwd root
+#touch /.autorelabel
+type exit twice
+
+2. Network Configuring and hostname(RH134 CH11)
+#nmcli dev status
+#nmcli con show
+#nmcli con add con-name "static" ifname [DEVICE] autoconnect yes type ethernet ip4 172.25.x.10/24 gw4 172.25.x.254
+#nmcli con up "static"
+#nmcli con show --active
+
+**Specify a DNS server
+#nmcli con mod "static" ipv4.dns 172.25.x.254
+#nmcli con up "static"   #active changes
+#cat /etc/resolv.conf
+
+**Changeing the system hostname
+#hostnamectl set-hostname desktopX.example.com
+#hostnamectl status
+#cat /etc/hostname
+
+**Test hostname resolution
+#getnet hosts desktopX.example.com
+
+[補充]
+**Add a secondary IP address without a gateway
+#nmcli con mod "static" +ipv4.address 10.10.10.10/16
+#nmcli con up "static"
+#nmcli con show --active
+
+**Verify the IP address
+#ip addr show DEVICE
+
+**Disable the original connection
+#nmcli con mod "System eth0" connection.autoconnect no
+reboot
+#nmcli con show --active
+
+**Reload the configuring changes
+#nmcli con reload
+#nmcli con up "eth0"
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+
+3. SELinux must be running in the Enforcing mode.
+
+# vim /etc/selinux/config
+SELINUX=enforcing
+SELINUXTYPE=targeted
+:x!
+
+# getenforce
+
+##重開機後生效
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+4. A YUM repository has been provided at http://content.example.com/rhel7.0/x86_64/dvd. Configure your system to use this location as a default repository
+
+# cd /etc/yum.repos.d/
+# vim yum.repo
+[update]
+name=yum update
+baseurl=http://content.example.com/rhel7.0/x86_64/dvd
+enabled=1
+gpgcheck=0
+:x!
+
+# yum list
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+5. Resize the logical volume vo and its filesystem to 300 MiB.
+     Make sure that the filesystem contents remain intact. Note: partitions are seldom exactly the same size requested, so a size within the range of 270 MiB to 330 MiB is acceptable.
+##因為要練習所以自己建立LVM，考試時會提供
+
+# fdisk /dev/sda
+n
+p
+Enter
++400M
+t
+4
+8e
+w
+# partprobe
+# pvcreate /dev/sda4
+# vgcreate test /dev/sda4
+# lvcreate -n vo -L 350M test
+# lvdisplay
+# mkfs -t xfs /dev/test/vo
+# mkdir /vo
+
+# vum /etc/fstab
+/dev/test/vo            /vo             xfs     defaults 1 2
+:x!
+
+# mount -a
+# df -h
+
+**縮小LV
+# lvreduce -L 300M /dev/test/vo
+WARNING: Reducing active and open logical volume to 300.00 MiB
+  THIS MAY DESTROY YOUR DATA (filesystem etc.)
+Do you really want to reduce vo? [y/n]: y
+
+# xfs_growfs /vo
+# lvdisplay /dev/test/vo
+# df -h
+
+**放大LV
+# lvextend -r -L 370M /dev/test/vo
+# xfs_growfs /vo
+# lvdisplay /dev/test/vo
+# df -h
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+6. Create the following users, groups, and group memberships:
+     A group named sysadms
+     A user natasha who belongs to sysadms as a secondary group
+     A user harry who also belongs to sysadms as a secondary group
+     A user sarah who does not have access to an interactive shell on the system, and who is not a member of sysadms
+     natasha , harry , and sarah should all have the password of ablerate
+    
+# groupadd sysadms
+# useradd natasha -G sysadms
+# useradd harry -G sysadms
+# useradd -s /sbin/nologin sarah
+# echo 'ablerate' | passwd --stdin natasha
+# echo 'ablerate' | passwd --stdin harry
+# echo 'ablerate' | passwd --stdin sarah
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+7. Copy the file /etc/fstab to /var/tmp/fstab. Configure the permissions of /var/tmp/fstab so that:
+     the file /var/tmp/fstab is owned by the root user.
+     the file /var/tmp/fstab belongs to the group root .
+     the file /var/tmp/fstab should not be executable by anyone.
+     the user natasha is able to read and write /var/tmp/fstab .
+     the user harry can neither write nor read /var/tmp/fstab .
+     all other users (current or future) have the ability to read /var/tmp/fstab.
+    
+# cp /etc/fstab /var/tmp/fstab
+# setfacl -m u:natasha:rw- /var/tmp/fstab
+# setfacl -m u:harry:- /var/tmp/fstab
+# setfacl -m o::r-- /var/tmp/fstab
+# getfacl /var/tmp/fstab
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+8. The user natasha must configure a cron job that runs daily at 14:23 local time and executes
+     /bin/echo hiya
+    
+# corntab -e
+23 14 * * * natasha /bin/echo hiya
+:x!
+
+# crontab -l
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+9. Create a collaborative directory /home/materials with the following characteristics:
+     Group ownership of /home/materials is sysadms
+     The directory should be readable, writable, and accessible to members of sysadms ,
+     but not to any other user. (It is understood that root has access to all files and directories on the system.)
+     Files created in /home/materials automatically have group ownership set to the sysadms group
+    
+# mkdir /home/materials
+# chgrp sysadms /home/materials
+# chmod 2770 /home/materials
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+10.  Install the appropriate kernel update from http://classroom/content/rhel7.0/x86_64/errata/. The following criteria must also be met:
+     The updated kernel is the default kernel when the system is rebooted.The original kernel remains available and bootable on the system
+    
+# cd /etc/yum.repos.d/
+# vim update.repo
+
+[update]
+name=yum update
+baseurl=http://content.example.com/rhel7.0/x86_64/dvd
+enabled=1
+gpgcheck=0
+
+[kernel]
+name=kernel update
+baseurl=http://classroom/content/rhel7.0/x86_64/errata/
+enabled=1
+gpgcheck=0
+:x!
+
+# yum install kernel
+# init 6
+
+# uname -a
+or
+# grep initramfs /boot/grub2/grub.cfg
+ ================================================================== 
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+11.  The system classroom.example.com provides an LDAP authentication service.
+     Your system should bind to this service as follows(this is for desktop[VM alias] configuration):
+     The base DN for the authentication service is dc=example,dc=com.
+     LDAP is used to provide both account information and authentication information.
+     The connection should be encrypted using the certificate at http://classroom/pub/example-ca.crt.
+     When properly configured, ldapuserX should be able to log into your system,
+     but will not have a home directory until you have completed the autofs requirement.
+     ldapuserX's password is password.
+    
+# yum -y install sssd authconfig-gtk krb5-workstation
+# systemctl isolate graphical.target  #switch to ‘runlevel 5′
+# system-config-authentication
+Use account database: LDAP
+LDAP search base DN : dc=example,dc=com
+LDAP server : ldap://classroom.example.com
+Use TLS to encrypt connections box is checked
+then click the Download CA Certificate,Enter the CA URL
+Authentication method : LDAP password
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+12. Configure your system so that it is an NTP client of classroom.example.com.
+
+# vim /etc/chrony.conf
+server classroom.example.com
+:x!
+
+# systemctl start chronyd
+# systemctl enable chronyd
+# chronyc sourcestats -v
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+13. **Configure autofs to automount the home directories of LDAP users as follows(this is for desktop[VM alias] configuration):
+     classroom.example.com NFS-exports /home/guests to your system. This filesystem contains a pre-configured home directory for the user ldapuserX
+     ldapuserX's home directory is classroom.example.com:/home/guests/ldapuserX
+     ldapuserX's home directory should be automounted locally beneath /netdir as /home/guests/ldapuserX
+     home directories must be writable by their users
+     ldapuserX's password is password.
+    
+# yum -y install autofs
+# vim /etc/auto.master.d/home.autofs
+/home/guests          /etc/auto.home
+:x!
+
+# vim /etc/auto.home
+*               classroom.example.com:/home/guests/&
+:x!
+
+# systemctl restart autofs
+# systemctl enable autofs
+
+使用ldapuser測試，登入後有看到home directory即成功
+# ssh ldapuserX@localhost
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+14. Create a user bilbobaggins with a userid of 2112. The password for this user should be GollumRing.
+
+# useradd -u 2112 bilbobaggins
+# echo 'GollumRing' | passwd --stdin bilbobaggins
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+15. Add an additional swap partition of 512 MiB to your system.
+     The swap partition should automatically mount when your system boots.
+     Do not remove or otherwise alter any existing swap partitions on your system.
+
+# fdisk /dev/sdb
+n
+e     #因為MBR只能建立3個Physical Partition，考試時會要求建立3個以上的Partition(含LVM)，所以先建立Extended再往下新增Partition
+enter
+enter
+p
+n
++512M
+p
+t
+82
+p
+w
+# partrpobe
+# mkswap /dev/sdb5
+# vim /etc/fstab
+/dev/sdb5     swap     swap     defaults 0 0
+:x!
+
+# swapon -a
+# swapon -s
+
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+16. Locate all the files owned by student and place a copy of them in the /root/findresults directory.
+
+# mkdir /root/findresults
+# for i in $(find / -user student); do rsync -av $i /root/findresults/; done
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+17. Find all lines in the file /usr/share/mime/packages/freedesktop.org.xml that contain the string ich.
+     Put a copy of all these lines in the original order in the file /root/lines.
+     /root/lines should contain no empty lines and all lines must be exact copies of the original lines in /usr/share/mime/packages/freedesktop.org.xml.
+
+# grep ich /usr/share/mime/packages/freedesktop.org.xml > /root/lines
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+18. Create a tar archive named /root/archive.tar.gz which contains the content of /usr/local.
+     The tar archive must be compressed using bzip.
+
+# tar -cvjf /root/archive.tar.gz /usr/local
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+------------------------------------------------------------------------------------------------------------------
+19. Create a new logical volume according to the following requirements:
+     The logical volume is named database and belongs to the datastore volume group and has a size of 50 extents.
+     Logical volumes in the datastore volume group should have an extent size of 8 MiB.
+     Format the new logical volume with a vfat filesystem.
+     The logical volume should be automatically mounted under /mnt/database at system boot time.
+    
+# fdisk /dev/sdb
+n
+enter
++1G
+p
+t
+5
+8e
+p
+w
+# partprobe
+# pvcreate /dev/sdb5
+# vgcreate -s 8M datastore /dev/sdb5
+# vgdisplay
+# lvcreate -l 50 -n database datastore
+# mkfs.vfat /dev/datastore/database
+# mkdir /mnt/database
+# vim /etc/fstab
+/dev/datastore/database /mnt/database     vfat     defaults 0 0
+:x!
+
+# mount -a
+==================================================================
+GO back the Question
+[[RHCE7_Question]]

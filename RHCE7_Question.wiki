@@ -1,0 +1,24 @@
+*[[index|首頁]]*
+
+Question:
+1. [[Anser_1&2]] You must make this network change in order to access the rest of the exam file
+2. [[Anser_1&2]] Once you have made the above changes, clicking the link: get http://classroom/content/student_download/<class-no>/EX200/exam.txt
+3.  [[Anser_3]]  Revisit     Done     Configure SELinux
+4.  [[Anser_4]]  Revisit     Done     Configure your system to use a default repository.
+5.  [[Anser_5]]  Revisit     Done     Resize a logical volume
+6.  [[Anser_6]]  Revisit     Done     Create user accounts
+7.  [[Anser_7]]  Revisit     Done     Configure /var/tmp/fstab permissions
+8.  [[Anser_8]]  Revisit     Done     Configure a cron job
+9.  [[Anser_9]]  Revisit     Done     Create a collaborative directory
+10. [[Anser_10]] Revisit     Done     Install kernel update
+11. [[Anser_11]] Revisit     Done     Bind to an external authentication service 
+12. [[Anser_12]] Revisit     Done     Configure NTP | RHCE_Anser.wiki   
+13. [[Anser_13]] Revisit     Done     Configure autofs 
+14. [[Anser_14]] Revisit     Done     Configure a user account 
+15. [[Anser_15]] Revisit     Done     Add a swap partition
+16. [[Anser_16]] Revisit     Done     Locate files
+17. [[Anser_17]] Revisit     Done     Find a string
+18. [[Anser_18]] Revisit     Done     Create an archive
+19. [[Anser_19]] Revisit     Done     Create a new logical volume 
+================================================================================
+*[[RHCE7_Anser| About the Anser to EX200]]*

@@ -1,0 +1,48 @@
+5. Resize the logical volume vo and its filesystem to 300 MiB.
+     Make sure that the filesystem contents remain intact. Note: partitions are seldom exactly the same size requested, so a size within the range of 270 MiB to 330 MiB is acceptable.
+##因為要練習所以自己建立LVM，考試時會提供
+
+# fdisk /dev/sda
+n
+p
+Enter
++400M
+t
+4
+8e
+w
+# partprobe
+# pvcreate /dev/sda4
+# vgcreate test /dev/sda4
+# lvcreate -n vo -L 350M test
+# lvdisplay
+# mkfs -t xfs /dev/test/vo
+# mkdir /vo
+
+# vum /etc/fstab
+/dev/test/vo            /vo             xfs     defaults 1 2
+:x!
+
+# mount -a
+# df -h
+
+**縮小LV
+# lvreduce -L 300M /dev/test/vo
+WARNING: Reducing active and open logical volume to 300.00 MiB
+  THIS MAY DESTROY YOUR DATA (filesystem etc.)
+Do you really want to reduce vo? [y/n]: y
+
+# xfs_growfs /vo
+# lvdisplay /dev/test/vo
+# df -h
+
+**放大LV
+# lvextend -r -L 370M /dev/test/vo
+# xfs_growfs /vo
+# lvdisplay /dev/test/vo
+# df -h
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

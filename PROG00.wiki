@@ -1,0 +1,254 @@
+APF FORMAT(DYNAMIC)                                                     
+APF ADD                                                                 
+    DSNAME(SYS1.LINKLIB)                                 VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(TCPIP.SEZALNK2)                               VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.CSSLIB)                                  VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SERBLINK)                                VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(CBC.SCCNCMP)                                  VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(CPAC.VTAMLIB)                                 VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(CEE.SCEERUN)                                  VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(ING.SINGMOD1)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(ING.SINGMOD2)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(ING.SINGMOD3)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(NETVIEW.SAQNLINK)                             VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(NETVIEW.CNMLINK)                              VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(NETVIEW.SCNMLNKN)                             VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(NETVIEW.SCNMLNK1)                             VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(NETVIEW.SCNMLPA1)                             VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(EQQ.SEQQLMD0)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(TWS.EQQ.SEQQLMD0)                             VOLUME(CATAP3) 
+APF ADD                                                                 
+    DSNAME(TCPIP.SEZALOAD)                               VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(SYS1.SIEALNKE)                                VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(SYS1.LPALIB)                                  VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(SYS1.MIGLIB)                                  VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(SYS1.NFSLIBE)                                 VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(SYS1.VTAMLIB)                                 VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(CBC.SCLBDLL2)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.DGTLLIB)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(TCPIP.SEZATCP)                                VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(CBC.SCLBDLL)                                  VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.CMDLIB)                                  VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SISTCLIB)                                VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SHASLNKE)                                VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(ISF.SISFLOAD)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(IGY.SIGYCOMP)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(CSF.SCSFMOD0)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(ISP.SISPLOAD)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SHASMIG)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SIOALMOD)                                VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SBDTLINK)                                VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(CPAC.LINKLIB)                                 VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(FFST.V120ESA.SEPWMOD2)                        VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(FFST.V120ESA.SEPWMOD3)                        VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.DFQLLIB)                                 VOLUME(******) 
+APF ADD                                                                 
+    DSNAME(ISF.SISFLINK)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(ISF.SISFMOD1)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SIEAMIGE)                                VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(FFST.V120ESA.SEPWMOD1)                        VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(ASM.SASMMOD1)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SBDTLIB)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(TCPIP.SEZADSIL)                               VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.SBDTCMD)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(REXX.SEAGALT)                                 VOLUME(&SYSR2) 
+APF ADD                                                                 
+    DSNAME(SYS1.&SYSPLEX..LPALIB)                        VOLUME(CATAP1) 
+APF ADD                                                                 
+    DSNAME(SYS1.&SYSPLEX..LINKLIB)                       VOLUME(CATAP1) 
+APF ADD                                                                 
+    DSNAME(SYS1.&SYSPLEX..VTAMLIB)                       VOLUME(CATAP1) 
+APF ADD                                                                 
+   DSNAME(DSNA10.SDSNEXIT)                               VOLUME(&SYSR3) 
+APF ADD                                                                 
+   DSNAME(DSNA10.SDSNLOAD)                               VOLUME(&SYSR3) 
+APF ADD                                                                 
+   DSNAME(DSNA10.SDXRRESL)                               VOLUME(&SYSR3) 
+APF ADD                                                                 
+   DSNAME(DSNA10.SDSNLINK)                               VOLUME(&SYSR3) 
+APF ADD                                                                 
+    DSNAME(DSNDBA1.DA11.SDSNEXIT)                        VOLUME(DB2AP1) 
+APF ADD                                                                 
+    DSNAME(DSNA10.SCQMLOAD)                              VOLUME(&SYSR3) 
+APF ADD                                                                 
+    DSNAME(DSNA10.SFECLOAD)                              VOLUME(&SYSR3) 
+APF ADD                                                                 
+    DSNAME(DSNA10.SCQCLOAD)                              VOLUME(&SYSR3) 
+APF ADD DSNAME(DB2QM.V3R1.SCQMLOAD)                      VOLUME(DB2AP2) 
+APF ADD DSNAME(DB2COM.V1R3.SFECLOAD)                     VOLUME(DB2AP2) 
+APF ADD DSNAME(IMSAP1.MDALIB)                            VOLUME(IMSP15) 
+APF ADD DSNAME(IMSAP2.MDALIB)                            VOLUME(IMSP25) 
+APF ADD DSNAME(IMSAP1.SDXRRESL)                          VOLUME(IMSP16) 
+APF ADD DSNAME(IMSAP2.SDXRRESL)                          VOLUME(IMSP26) 
+APF ADD DSNAME(IMSAP1.SDFSRESL)                          VOLUME(IMSP16) 
+APF ADD DSNAME(IMSAP2.SDFSRESL)                          VOLUME(IMSP26) 
+APF ADD DSNAME(IMSAP1.MODBLKS)                           VOLUME(IMSP15) 
+APF ADD DSNAME(IMSAP1.MODBLKSA)                          VOLUME(IMSP15) 
+APF ADD DSNAME(IMSAP1.MODBLKSB)                          VOLUME(IMSP15) 
+APF ADD                                                                 
+    DSNAME(OMEGAXE.V53.&SYSNAME..RKANMODU)               VOLUME(CATAP4) 
+APF ADD                                                                 
+    DSNAME(OMEGAXE.V53.PBASE.RKANMOD)                    VOLUME(CATAP4) 
+APF ADD                                                                 
+    DSNAME(OMEGAXE.V53.PBASE.RKANMODL)                   VOLUME(CATAP4) 
+APF ADD                                                                 
+    DSNAME(OMEGAXE.V53.PBASE.RKANMODP)                   VOLUME(CATAP4) 
+APF ADD                                                                 
+    DSNAME(OMEGAXE.V53.PBASE.RKANMODR)                   VOLUME(CATAP4) 
+APF ADD                                                                 
+    DSNAME(OPER.PGM.LOAD)                                VOLUME(SHR001) 
+APF ADD                                                                 
+    DSNAME(OPER.PGM.LOAD2)                               VOLUME(SHR001) 
+APF ADD                                                                 
+    DSNAME(HNIB.LOAD.TPPSYS)                             VOLUME(APGP01) 
+APF ADD                                                                 
+    DSNAME(HNTB.LOAD.TPPSYS)                             VOLUME(RFPP03) 
+APF ADD                                                                 
+    DSNAME(NCP750P.SSPLIB)                               VOLUME(NETP41) 
+APF ADD                                                                 
+    DSNAME(NCP750P.NCPLIB)                               VOLUME(NETP41) 
+APF ADD                                                                 
+    DSNAME(SLS.SOS5100.SLSLINK)                          VOLSER(BMPSR1) 
+APF ADD                                                                 
+    DSNAME(SLS.SMC5100.SMCLINK)                          VOLSER(BMPSR1) 
+APF ADD                                                                 
+    DSNAME(SLS.SCS5100.SCSLINK)                          VOLSER(BMPSR1) 
+APF ADD                                                                 
+    DSNAME(SLS.SSCR65C.SACLINK)                          VOLSER(BMPSR1) 
+APF ADD                                                                 
+    DSNAME(SLS.SSCR65B.CSLLINK)                          VOLSER(BMPSR1) 
+APF ADD                                                                 
+    DSNAME(SLS.SMC6100.SMCLINK)                          VOLSER(BMPSRA) 
+APF ADD                                                                 
+    DSNAME(SLS.SOS6100.SLSLINK)                          VOLSER(BMPSRA) 
+APF ADD                                                                 
+    DSNAME(SLS.SWS6100.SWSLINK)                          VOLSER(BMPSRA) 
+APF ADD                                                                 
+    DSNAME(SLS.SCS6100.SCSLINK)                          VOLSER(BMPSRA) 
+APF ADD                                                                 
+    DSNAME(SLS.SSCR70D.SACLINK)                          VOLSER(BMPSRA) 
+APF ADD                                                                 
+    DSNAME(SLS.SSCR70C.CSLLINK)                          VOLSER(BMPSRA) 
+APF ADD                                                                 
+    DSNAME(SYSWARE.CHGMAN.V562.LOAD)                     VOLSER(RFPP12) 
+APF ADD                                                                 
+    DSNAME(SYSWARE.CHGMAN.SERCOMC.V562.LOAD)             VOLSER(RFPP12) 
+APF ADD                                                                 
+    DSNAME(GDHM.SGDPLOAD)                                VOLSER(&SYSR3) 
+APF ADD DSNAME(GSS.CDSRV1.LINKLIB)                       VOLSER(CATAP5) 
+APF ADD DSNAME(GSS.CDSRV2.LINKLIB)                       VOLSER(CATAP5) 
+/* 103/11/04 ADD CD V5R2 VERSION  */                                    
+APF ADD DSNAME(CD390.V52.CDMGR.LINKLIB)                  VOLSER(CATAP5) 
+APF ADD DSNAME(CD390.V52.SDGALINK)                       VOLSER(CATAP5) 
+APF ADD DSNAME(FMN13.APS1.SFMNMOD1)                      VOLSER(CATAP2) 
+SYSLIB LINKLIB(SYS1.&SYSPLEX..LINKLIB)                                  
+SYSLIB LPALIB(SYS1.&SYSPLEX..LPALIB)                                    
+LNKLST DEFINE NAME(LNKLST00)                                            
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.&SYSPLEX..LINKLIB)                   
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.LINKLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(CEE.SCEERUN2)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.CSSLIB)                              
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SERBLINK)                            
+LNKLST ADD NAME(LNKLST00) DSN(CBC.SCCNCMP)                              
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.&SYSPLEX..VTAMLIB)                   
+LNKLST ADD NAME(LNKLST00) DSN(CPAC.VTAMLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.VTAMLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(CEE.SCEERUN)                              
+LNKLST ADD NAME(LNKLST00) DSN(ING.SINGMOD1)                             
+LNKLST ADD NAME(LNKLST00) DSN(ING.SINGMOD2)                             
+LNKLST ADD NAME(LNKLST00) DSN(NETVIEW.SAQNLINK)                         
+LNKLST ADD NAME(LNKLST00) DSN(NETVIEW.CNMLINK)                          
+LNKLST ADD NAME(LNKLST00) DSN(NETVIEW.SCNMLNKN)                         
+LNKLST ADD NAME(LNKLST00) DSN(EQQ.SEQQLMD0)                             
+LNKLST ADD NAME(LNKLST00) DSN(TCPIP.SEZALOAD)                           
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SIEALNKE)                            
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.MIGLIB)                              
+LNKLST ADD NAME(LNKLST00) DSN(GIM.SGIMLMD0)                             
+LNKLST ADD NAME(LNKLST00) DSN(ISF.SISFMOD1)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.NFSLIBE)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SCBDHENU)                            
+LNKLST ADD NAME(LNKLST00) DSN(CBC.SCLBDLL2)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.DGTLLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(GDDM.SADMMOD)                             
+LNKLST ADD NAME(LNKLST00) DSN(FFST.V120ESA.SEPWMOD4)                    
+LNKLST ADD NAME(LNKLST00) DSN(EOY.SEOYLOAD)                             
+LNKLST ADD NAME(LNKLST00) DSN(CBC.SCLBDLL)                              
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.CMDLIB)                              
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SHASLNKE)                            
+LNKLST ADD NAME(LNKLST00) DSN(ISF.SISFLOAD)                             
+LNKLST ADD NAME(LNKLST00) DSN(IGY.SIGYCOMP)                             
+LNKLST ADD NAME(LNKLST00) DSN(CSF.SCSFMOD0)                             
+LNKLST ADD NAME(LNKLST00) DSN(ISP.SISPLOAD)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SORTLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SICELINK)                            
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SHASMIG)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SIOALMOD)                            
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SBDTLINK)                            
+LNKLST ADD NAME(LNKLST00) DSN(CPAC.LINKLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(FFST.V120ESA.SEPWMOD2)                    
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.DFQLLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SIEAMIGE)                            
+LNKLST ADD NAME(LNKLST00) DSN(EOX.SEPHLOD1)                             
+LNKLST ADD NAME(LNKLST00) DSN(ASM.SASMMOD1)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SBDTLIB)                             
+LNKLST ADD NAME(LNKLST00) DSN(SYS1.SBDTCMD)                             
+LNKLST ADD NAME(LNKLST00) DSN(REXX.SEAGALT)                             
+LNKLST ADD NAME(LNKLST00) DSN(DSNA10.SDSNLINK)           VOLUME(&SYSR3) 
+LNKLST ADD NAME(LNKLST00) DSN(OPER.PGM.LOAD)             VOLUME(SHR001) 
+LNKLST ADD NAME(LNKLST00) DSN(SLS.SCS5100.SCSLINK)       VOLUME(BMPSR1) 
+LNKLST ADD NAME(LNKLST00) DSN(SLS.SCS6100.SCSLINK)       VOLUME(BMPSRA) 
+LNKLST ADD NAME(LNKLST00) DSN(GDHM.SGDPLOAD)             VOLUME(&SYSR3) 
+LNKLST ADD NAME(LNKLST00) DSN(GSS.CDSRV1.LINKLIB)        VOLUME(CATAP5) 
+LNKLST ADD NAME(LNKLST00) DSN(GSS.CDSRV2.LINKLIB)        VOLUME(CATAP5) 
+LNKLST ACTIVATE NAME(LNKLST00)                                          
+EXIT ADD EXITNAME(DFSAOE00.MSG) MODNAME(EVIPVEX1) DSNAME(ING.SINGMOD1)  
+STATE(ACTIVE)                                                           
+EXIT ADD EXITNAME(DFSAOE00.CMD) MODNAME(EVIPVEX1) DSNAME(ING.SINGMOD1)  
+STATE(ACTIVE)                                                           

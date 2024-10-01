@@ -1,0 +1,17 @@
+#!/usr/local/bin/rexx
+today = date("B")
+yesterday = today - 14
+yesterday_yyyymmdd = date("S", yesterday, "B")
+yesterday_format = "D"substr(yesterday_yyyymmdd, 5)
+
+say 'today              ='     today
+say 'yesterday          ='     yesterday
+say 'yesterday_yyyymmdd ='     yesterday_yyyymmdd
+say 'yesterday_format   ='     yesterday_format 
+
+##################################################
+output:
+today              = 737772
+yesterday          = 737758
+yesterday_yyyymmdd = 20201130
+yesterday_format   = D1130

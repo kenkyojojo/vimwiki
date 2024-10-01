@@ -1,0 +1,2 @@
+#Compile cobol
+cobc -x hello.cob

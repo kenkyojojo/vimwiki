@@ -1,0 +1,53 @@
+1. root can not login , recovering the root password(RH124 CH13)
+
+reboot, boot loader pressing any key , press e
+linux16那行按End移到最後，輸入rd.break enforcing=0
+Press Ctrl+x to boot with the changes
+#mount -o remount,rw /sysroot
+#chroot /sysroot
+#passwd root
+#touch /.autorelabel
+type exit twice
+===================================================================================
+2. Network Configuring and hostname(RH134 CH11)
+#nmcli dev status
+#nmcli con show
+#nmcli con add con-name "static" ifname [DEVICE] autoconnect yes type ethernet ip4 172.25.x.10/24 gw4 172.25.x.254
+#nmcli con mod "static" ipv4.method manual
+#nmcli con up "static"
+#nmcli con show --active
+
+**Specify a DNS server
+#nmcli con mod "static" ipv4.dns 172.25.x.254
+#nmcli con up "static"   #active changes
+#cat /etc/resolv.conf
+
+**Changeing the system hostname
+#hostnamectl set-hostname desktopX.example.com
+#hostnamectl status
+#cat /etc/hostname
+
+**Test hostname resolution
+#getnet hosts desktopX.example.com
+
+[補充]
+**Add a secondary IP address without a gateway
+#nmcli con mod "static" +ipv4.address 10.10.10.10/16
+#nmcli con up "static"
+#nmcli con show --active
+
+**Verify the IP address
+#ip addr show DEVICE
+
+**Disable the original connection
+#nmcli con mod "System eth0" connection.autoconnect no
+reboot
+#nmcli con show --active
+
+**Reload the configuring changes
+#nmcli con reload
+#nmcli con up "eth0"
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]

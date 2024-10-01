@@ -1,0 +1,30 @@
+/* REXX JLRALERT                                         */            
+/* SEND JOB LONG RUN ALERT WHEN EQQE038 APPEARS          */            
+/* ADD: 2020.10.14 BY IBM/TW                             */            
+/* UPDATED:                                              */            
+ARG JTOKEN                                                             
+PARSE VAR JTOKEN JNAME '(' JNUM ')' .                                  
+                                                                       
+PGM = 'JLRALERT'                                                       
+SAY 'PGM: 'PGM' STARTED.' TIME() DATE(U)                               
+                                                                       
+"FREE F(JOBTBLIN)"                                                     
+"ALLOC DA('TWS.V93.TSTPLEX1.ALERT') F(JOBTBLIN) SHR"                   
+IF  RC = 20 THEN DO                                                    
+   SAY '<<< TWS.V93.TSTPLEX1.ALERT ALLOC ERROR, PLS CHK.>>>'           
+   "FREE F(JOBTBLIN)"                                                  
+   EXIT 999                                                            
+   END                                                                 
+                                                                       
+ADDRESS MVS 'EXECIO * DISKR JOBTBLIN (STEM JLINE. FINIS'               
+DO I = 1 TO JLINE.0                                                    
+   IF SUBWORD(JLINE.I,1,1) = JNAME THEN DO                             
+      'HIGHLMSG JOB RUNS LONG: 'JTOKEN' IF JOB'S REORG CHK,DON'T CALL' 
+      'HIGHLMSG JOB RUNS LONG: 'JTOKEN' PLS CHECK JOB AND CALL AP...'  
+      "FREE F(JOBTBLIN)"                                               
+      EXIT 000                                                         
+      END                                                              
+   END                                                                 
+SAY 'JOBNAME: 'JNAME' WAS NOT FOUND IN TABLE, NO ALERT PERFORMED.'     
+"FREE F(JOBTBLIN)"                                                     
+EXIT                                                                   

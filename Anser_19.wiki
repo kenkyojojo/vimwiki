@@ -1,0 +1,33 @@
+19. Create a new logical volume according to the following requirements:
+     The logical volume is named database and belongs to the datastore volume group and has a size of 50 extents.
+     Logical volumes in the datastore volume group should have an extent size of 8 MiB.
+     Format the new logical volume with a vfat filesystem.
+     The logical volume should be automatically mounted under /mnt/database at system boot time.
+    
+# fdisk /dev/sdb
+n
+enter
++1G
+p
+t
+5
+8e
+p
+w
+# partprobe
+# pvcreate /dev/sdb5
+# vgcreate -s 8M datastore /dev/sdb5
+# vgdisplay
+# lvcreate -l 50 -n database datastore
+# mkfs.vfat /dev/datastore/database
+# mkdir /mnt/database
+# vim /etc/fstab
+/dev/datastore/database /mnt/database     vfat     defaults 0 0
+:x!
+
+# mount -a
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+
+[[./index|Go home]]

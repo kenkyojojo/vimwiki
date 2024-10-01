@@ -1,0 +1,169 @@
+/* Reference 
+   https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.ieae200/ieae200540.htm 
+*/
+/*
+   https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.ieae200/sched.htm
+    Use the SCHEDxx member of parmlib to specify the following: 
+    - Size of the master trace table. 
+    - Abend codes that are eligible for automatic restart.
+    - Programs that are to be included in the program properties table (PPT) and thus receive special attributes.
+*/  
+
+
+/* IBM-supplied program properties table values 
+   https://www.ibm.com/support/knowledgecenter/SSLTBW_2.1.0/com.ibm.zos.v2r1.ieae200/ieae200541.htm 
+*/
+
+/* Sched paramater describe
+MT SIZE	"Specifies the size (in kilobytes) of the master trace table, which is used by the TRACE command. The system creates the master trace table during master scheduler initialization. 
+Default: MT SIZE(24K)"
+PPT	"Allows the installation to specify a list of programs that require special attributes. Sometimes, your application programs will need to possess special properties to run as efficiently and securely as possible. 
+For example, an application that requires access to fetch-protected system data will need a system key (0-7) instead of the usual problem program key of 8. 
+Or, for example, an application that cannot run V=R, but must not be swapped out because of real-time considerations, will need to be identified to the system as nonswappable. 
+Entries for these programs are created in the program properties table (PPT). 
+Default: NONE"
+PGMNAME(name)	"PGMNAME(name) identifies by name the program, specified in the PGM parameter on the EXEC statement for a job or step, that requires special attributes. 
+PGMNAME(name)is required on the PPT statement. "
+{CANCEL}|{NOCANCEL}	"The program specified on PGMNAME can be canceled (CANCEL) or cannot be canceled (NOCANCEL). 
+Default: CANCEL"
+KEY(n)	"The program specified on PGMNAME is to have the protection key (n) assigned to it. Usually, keys greater than 8 are reserved for V=R programs, and the system assigns these keys dynamically. 
+If the KEY field is specified for a V=R program, ensure that no other V=R program runs at the same time with the same key. 
+A V=V program may run with a KEY value greater than 8 when V=R programs are running with channel program translation. 
+Value Range: 0-15
+Default: Key 8"
+{SWAP}|{NOSWAP}	"The program specified on PGMNAME is swappable (SWAP) or non-swappable (NOSWAP).
+Default: SWAP"
+{PRIV | NOPRIV}	"The program specified on PGMNAME is privileged (PRIV), or not privileged (NOPRIV). 
+A task marked PRIV is put in the SYSSTC service class if it is not explicitly classified in the WLM classification rules.
+Default: NOPRIV"
+{PASS| NOPASS}	"The program specified on PGMNAME can or cannot bypass security protection (password protection and RACF®). PASS indicates that security protection is in effect; NOPASS indicates that security protection is not required.
+Default: PASS"
+{SYST | NOSYST}	"The program specified on PGMNAME is a system task and is not timed (SYST) or is not a system task and is to be timed (NOSYST). For SYST, the program must be a one-step job started by a START or MOUNT command. If these conditions are not met, SYST is nullified and the system issues message IEF188I. All other properties remain in effect. 
+If procedures are multistep or if NOSYST is specified, TIME=1440 may be required to prevent timeout.
+In goal mode, a task marked SYST is put in the SYSSTC service class unless it is explicitly classified in the WLM classification rules before any SPM rule entries.
+Default: NOSYST"
+{DSI | NODSI}	"Start of changeThe program specified on PGMNAME requires data set integrity (DSI) or does not require data set integrity (NODSI). Data set integrity means that the job holds an ENQ for the data sets it allocates. The DSI/NODSI option applies to batch allocation only. Dynamic allocation uses its input parameters to determine whether to enqueue on data sets. JES2 is an exception in that it honors the PPT specifications and uses DSI/NODSI for dynamic allocations of the JES2 PROCLIB data sets. 
+Default: DSI"
+NOPREF	"The program specified on PGMNAME does not need to have all private area short-term fixed pages assigned to preferred storage frames. That is, the program's short-term fixes are in fact short-term fixes and can be allowed in reconfigurable storage. NOPREF is significant only for users of the SYSEVENT TRANSWAP. This includes V=R job steps, nonswappable programs, applications using the BTAM OPEN function, and any applications using a system function that issues SYSEVENT TRANSWAP.
+Default: None"
+*/
+                                                                  /* PPT = PROGRAM PROPERTIES TABLE             */ 
+MT  SIZE(64K)                                                     /* Default - 24K                              */  
+
+PPT PGMNAME(FZDES000)                                             /* FZDES000 (PROGRAM NAME) Server Main module */
+    CANCEL                                                        /* CAN BE CANCELLED                           */
+    NOSWAP                                                        /* NON-SWAPPABLE                              */
+    KEY(3)                                                        /* STORAGE PROTECTION KEY                     */
+    PASS                                                          /* NO PASSWORD BYPASS                         */
+    SYST                                                          /* SYSTEM TASK , NOT TIMED                    */
+    AFF(NONE)                                                     /* NO PROCESSOR AFFINITY                      */
+
+PPT PGMNAME(GEOXCFST)                                             /* GEOXCFST  (PROGRAM NAME)                   */
+    CANCEL                                                        /* CAN BE CANCELLED                           */
+    NOSWAP                                                        /* NON-SWAPPABLE                              */
+    PRIV                                                          /* PRIVILEGED                                 */ 
+    SYST                                                          /* GDPS/PPRC HM                               */ 
+
+PPT PGMNAME(EQQMAJOR)                                             /* TWSz (PROGRAM NAME)                        */
+    NOSWAP                                                        /* NON-SWAPPABLE                              */
+
+PPT PGMNAME(DSIMNT)                                               /* NETVIEW (PROGRAM NAME)                     */
+    NOSWAP                                                        /* NON-SWAPPABLE (INGESCH)                    */
+
+PPT PGMNAME(HSAPINIT)                                             /* SYSTEM AUTOMATION MGR                      */ 
+    NOSWAP                                                        /* NON-SWAPPABLE                              */
+    PRIV                                                          /* PRIVILEGED , PUT IN SYSSTC SERVICE         */   
+
+PPT PGMNAME(DSNYASCP)                                             /* DB (PROGRAM NAME)                          */
+    CANCEL                                                        /* CAN BE CANCELLED                           */
+    KEY(7)                                                        /* STORAGE PROTECTION KEY                     */
+    NOPRIV                                                        /* NOT PRIVILEGED                             */
+    NOSWAP                                                        /* NON-SWAPPABLE                              */
+    DSI                                                           /* DATA SET INTEGRITY                         */
+    PASS                                                          /* NO PASSWORD BYPASS                         */
+    SYST                                                          /* SYSTEM TASK , NOT TIMED                    */
+    AFF(NONE)                                                     /* NO PROCESSOR AFFINITY                      */
+
+PPT PGMNAME(DSNUTILB)                                             /* DB2 UTILITY  (PROGRAM NAME)                */
+    CANCEL                                                        /* CAN BE CANCELLED                           */
+    KEY(7)                                                        /* STORAGE PROTECTION KEY                     */
+    NOPRIV                                                        /* NOT PRIVILEGED                             */
+    SWAP                                                          /* SWAPPABLE                                  */
+    DSI                                                           /* DATA SET INTEGRITY                         */
+    PASS                                                          /* NO PASSWORD BYPASS                         */
+    NOSYST                                                        /* SYSTEM TASK , NOT TIMED                    */
+    AFF(NONE)                                                     /* NO PROCESSOR AFFINITY                      */
+
+PPT PGMNAME(DXRRLM00)                                             /* FIRLM (PROGRAM NAME)                       */
+    CANCEL                                                        /* CAN BE CANCELLED                           */
+    KEY(7)                                                        /* STORAGE PROTECTION KEY                     */
+    NOPRIV                                                        /* NOT PRIVILEGED                             */
+    NOSWAP                                                        /* NON-SWAPPABLE                              */
+    DSI                                                           /* DATA SET INTEGRITY                         */
+    PASS                                                          /* NO PASSWORD BYPASS                         */
+    SYST                                                          /* SYSTEM TASK , NOT TIMED                    */
+    AFF(NONE)                                                     /* NO PROCESSOR AFFINITY                      */
+
+                                                                  /* IMS ONLINE CONTROL REGION                  */
+PPT PGMNAME(DFSMVRC0)                                             /* MVS SUPPLIED VALUE IS - '6870FFFF00000000' */
+    CANCEL                                                        /* PROGRAM CAN BE CANCELLED         (DEFAULT) */
+    KEY(7)                                                        /* STORAGE PROTECT KEY                        */
+    NOSWAP                                                        /* PROGRAM IS NOT-SWAPPABLE                   */
+    NOPRIV                                                        /* PROGRAM NOT PRIVILEGED           (DEFAULT) */
+    SYST                                                          /* PROGRAM IS A SYSTEM TASK                   */
+    DSI                                                           /* DOES REQUIRE DATA SET INTEGRITY  (DEFAULT) */
+    PASS                                                          /* PASSWORD PROTECTION ACTIVE       (DEFAULT) */
+    AFF(NONE)                                                     /* NO CPU AFFINITY                  (DEFAULT) */
+    NOPREF                                                        /* NO PREFERRED STORAGE FRAMES    (NODEFAULT) */
+
+                                                                  /* CQS - COMMON QUEUE SERVER                  */
+PPT PGMNAME(CQSINIT0)                                             /* MVS SUPPLIED VALUE IS - '6870FFFF00000000' */
+    CANCEL                                                        /* PROGRAM CAN BE CANCELLED         (DEFAULT) */
+    KEY(7)                                                        /* STORAGE PROTECT KEY                        */
+    NOSWAP                                                        /* PROGRAM IS NOT-SWAPPABLE                   */
+    NOPRIV                                                        /* PROGRAM NOT PRIVILEGED           (DEFAULT) */
+    SYST                                                          /* PROGRAM IS A SYSTEM TASK                   */
+    DSI                                                           /* DOES REQUIRE DATA SET INTEGRITY  (DEFAULT) */
+    PASS                                                          /* PASSWORD PROTECTION ACTIVE       (DEFAULT) */
+    AFF(NONE)                                                     /* NO CPU AFFINITY                  (DEFAULT) */
+    NOPREF                                                        /* NO PREFERRED STORAGE FRAMES    (NODEFAULT) */
+
+                                                                  /* CSL - COMMON SERVICE LAYER                 */
+PPT PGMNAME(BPEINI00)                                             /* PROGRAM NAME                               */
+    CANCEL                                                        /* PROGRAM CAN BE CANCELLED                   */
+    KEY(7)                                                        /* STORAGE PROTECT KEY                        */
+    NOSWAP                                                        /* PROGRAM IS NOT-SWAPPABLE                   */
+    NOPRIV                                                        /* PROGRAM NOT PRIVILEGED                     */
+    SYST                                                          /* PROGRAM IS A SYSTEM TASK                   */
+    DSI                                                           /* REQUIRES DATA SET INTEGRITY                */
+    PASS                                                          /* PASSWORD PROTECTION ACTIVE                 */
+    AFF(NONE)                                                     /* NO CPU AFFINITY                            */
+    NOPREF                                                        /* NO PREFERRED STORAGE FRAMES                */
+
+                                                                  /* HWS - IMS CONNECT                          */
+PPT PGMNAME(HWSHWS00)                                             /* PROGRAM NAME = HWSHWS00                    */
+    CANCEL                                                        /* PROGRAM CAN BE CANCELLED                   */
+    KEY(7)                                                        /* STORAGE PROTECT KEY                        */
+    NOSWAP                                                        /* PROGRAM IS NOT SWAPPABLE                   */
+    NOPRIV                                                        /* PROGRAM IS NOT PRIVILEGED                  */
+    DSI                                                           /* REQUIRES DATA SET INTEGRITY                */
+    PASS                                                          /* CANNOT BYPASS PASSWORD PROTECTION          */
+    SYST                                                          /* PROGRAM IS A SYSTEM TASK                   */
+    AFF(NONE)                                                     /* NO CPU AFFINITY                            */
+    NOPREF                                                        /* PRIVILEGED , PUT IN SYSSTC SERVICE         */
+
+                                                                  /* ACS HSC                                    */ 
+PPT PGMNAME(SLSBINIT)                                             /* FOR HSC                                    */
+    SYST                                                          /* PROGRAM IS A SYSTEM TASK                   */
+    KEY(3)                                                        /* STORAGE PROTECT KEY                        */
+    PRIV                                                          /* PRIVILEGED                                 */                        
+
+PPT PGMNAME(SCSBINIT)                                             /* POR MVSCSC                                 */
+    SYST                                                          /* PROGRAM IS A SYSTEM TASK                   */
+    KEY(3)                                                        /* STORAGE PROTECT KEY                        */ 
+    PRIV                                                          /* PRIVILEGED , PUT IN SYSSTC SERVICE         */
+
+PPT PGMNAME(SMCBINT)                                              /* FOR SMC                                    */
+    SYST                                                          /* PROGRAM IS A SYSTEM TASK                   */
+    KEY(3)                                                        /* STORAGE PROTECT KEY                        */ 
+    PRIV                                                          /* PRIVILEGED , PUT IN SYSSTC SERVICE         */   

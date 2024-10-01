@@ -1,0 +1,16 @@
+4. A YUM repository has been provided at http://content.example.com/rhel7.0/x86_64/dvd. Configure your system to use this location as a default repository
+
+# cd /etc/yum.repos.d/
+# vim yum.repo
+[update]
+name=yum update
+baseurl=http://content.example.com/rhel7.0/x86_64/dvd
+enabled=1
+gpgcheck=0
+:x!
+
+# yum list
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]

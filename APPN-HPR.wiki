@@ -1,0 +1,7 @@
+The two important features of HPR are:
+
+1. Automatic Network Routing (ANR) on intermediate nodes
+    ANR is designed to function on the intermediate nodes along the transport path, routing data quickly and efficiently from one link to another, without regard to session awareness.
+
+2. Rapid Transport Protocol (RTP) on endpoints
+    RTP is implemented in the endpoints of a connection, providing error recovery from packet loss and support of control flows between endpoints. It does have session awareness.

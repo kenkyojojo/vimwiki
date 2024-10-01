@@ -1,0 +1,31 @@
+15. Add an additional swap partition of 512 MiB to your system.
+     The swap partition should automatically mount when your system boots.
+     Do not remove or otherwise alter any existing swap partitions on your system.
+
+# fdisk /dev/sdb
+n
+e     #因為MBR只能建立3個Physical Partition，考試時會要求建立3個以上的Partition(含LVM)，所以先建立Extended再往下新增Partition
+enter
+enter
+p
+n
++512M
+p
+t
+82
+p
+w
+# partrpobe
+# mkswap /dev/sdb5
+# vim /etc/fstab
+/dev/sdb5     swap     swap     defaults 0 0
+:x!
+
+# swapon -a
+# swapon -s
+
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

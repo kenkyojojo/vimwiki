@@ -1,0 +1,19 @@
+6. Create the following users, groups, and group memberships:
+     A group named sysadms
+     A user natasha who belongs to sysadms as a secondary group
+     A user harry who also belongs to sysadms as a secondary group
+     A user sarah who does not have access to an interactive shell on the system, and who is not a member of sysadms
+     natasha , harry , and sarah should all have the password of ablerate
+    
+# groupadd sysadms
+# useradd natasha -G sysadms
+# useradd harry -G sysadms
+# useradd -s /sbin/nologin sarah
+# echo 'ablerate' | passwd --stdin natasha
+# echo 'ablerate' | passwd --stdin harry
+# echo 'ablerate' | passwd --stdin sarah
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

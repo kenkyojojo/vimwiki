@@ -1,0 +1,29 @@
+10.  Install the appropriate kernel update from http://classroom/content/rhel7.0/x86_64/errata/. The following criteria must also be met:
+     The updated kernel is the default kernel when the system is rebooted.The original kernel remains available and bootable on the system
+    
+# cd /etc/yum.repos.d/
+# vim update.repo
+
+[update]
+name=yum update
+baseurl=http://content.example.com/rhel7.0/x86_64/dvd
+enabled=1
+gpgcheck=0
+
+[kernel]
+name=kernel update
+baseurl=http://classroom/content/rhel7.0/x86_64/errata/
+enabled=1
+gpgcheck=0
+:x!
+
+# yum install kernel
+# init 6
+
+# uname -a
+or
+# grep initramfs /boot/grub2/grub.cfg
+ ================================================================== 
+GO back the Question
+[[RHCE7_Question]]
+

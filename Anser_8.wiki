@@ -1,0 +1,13 @@
+8. The user natasha must configure a cron job that runs daily at 14:23 local time and executes
+     /bin/echo hiya
+    
+# corntab -e
+23 14 * * * natasha /bin/echo hiya
+:x!
+
+# crontab -l
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

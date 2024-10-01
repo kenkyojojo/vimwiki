@@ -1,0 +1,11 @@
+16. Locate all the files owned by student and place a copy of them in the /root/findresults directory.
+
+# mkdir /root/findresults
+# find / -user iar –exec cp -rfp {} /root/findresults \; ls /root/findresults
+# or
+# for i in $(find / -user student); do rsync -av $i /root/findresults/; done
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

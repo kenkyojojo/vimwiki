@@ -1,0 +1,276 @@
+//RMFRPT  JOB 'ACCOUNTING INFORMATION',NOTIFY=&SYSUID,REGION=0M,       
+//        CLASS=A,MSGLEVEL=(1,1)                                        
+//********************************************************           
+//     SET USERHLQ=IBMSE01                                           
+//     SET SYSPLEX=PLEXBP01                                          
+//     SET DATETIME=200519       
+//     SET SYSID=BP0101                                      
+//     SET SMFIN=SYSBAK.BPZA.SMF.DASD.G00000V                        
+//*************DELETE MERGE SMF DATASET *****************/           
+//DEL      EXEC PGM=IEFBR14                                          
+//OUTDD1   DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..SUMMARY,    
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CPU,        
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..ESS,        
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CACHE,      
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CHAN,       
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..DEVICE,     
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..PAGING,     
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..VSTOR,      
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)                 
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..WLMGL,      
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)      
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..SDASD,      
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)     
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CF,      
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)              
+//         DD DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..XCF,      
+//         UNIT=3390,SPACE=(TRK,0),DISP=(MOD,DELETE)   
+/*                                                                                                                                        
+//SMFSORT  EXEC PGM=SORT                                                
+//SORTIN   DD DISP=SHR,DSN=&SMFIN.    
+//SORTOUT  DD DISP=(NEW,PASS,DELETE),UNIT=3390,                         
+//         SPACE=(CYL,(2000,500),RLSE),DSN=&T1                          
+//SORTWK01 DD SPACE=(CYL,(2000,500),RLSE)                               
+//SORTWK02 DD SPACE=(CYL,(2000,500),RLSE)                               
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT   DD SYSOUT=*                                                  
+//SYSIN    DD *                                                         
+  SORT FIELDS=(11,4,CH,A,7,4,CH,A),EQUALS                               
+  MODS E15=(ERBPPE15,36000,,N),E35=(ERBPPE35,3000,,N)                   
+/*                 
+//*************PRINT RMF SUMMARY INTERVAL REPORT ***************/
+//RMFRPT   EXEC PGM=ERBRMFPP,REGION=0M
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT  
+//PPSUM001 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T1
+//PPSUM002 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T2
+//PPSUM003 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T3
+//PPSUM004 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T4
+//PPSUM005 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T5
+//PPSUM006 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T6
+//PPSUM007 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T7
+//PPSUM008 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T8
+//PPSUM009 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T9
+//PPSUM010 DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,PASS,DELETE),
+//            DSN=&T10
+//MFPMSGDS DD   SYSOUT=*
+//SYSOUT   DD   SYSOUT=*
+//SYSIN    DD   *
+    SUMMARY(INT)
+/*
+//*************MERGE RMF SUMMARY INTERVAL REPORT ***************/
+//STEP00   EXEC PGM=IEBGENER,COND=(4,LT,RMFRPT)
+//SYSUT1   DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM001
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM002
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM003
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM004
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM005
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM006
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM007
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM008
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM009
+//         DD DISP=(OLD,DELETE),DSN=*.RMFRPT.PPSUM010
+//SYSUT2   DD UNIT=3390,SPACE=(CYL,(10,10),RLSE),
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),
+//            DISP=(NEW,CATLG,DELETE),
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..SUMMARY
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//SYSIN    DD DUMMY
+/*     
+//*************PRINT RMF CPU    INTERVAL REPORT ***************/                                                
+//STEP01   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,500),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CPU                       
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(CPU)                                                        
+    NOSUMMARY                                                           
+/*             
+//*************PRINT RMF CHAN   INTERVAL REPORT ***************/                                                         
+//STEP02   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,500),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CHAN                      
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(CHAN)                                                       
+    NOSUMMARY                                                           
+/*              
+//*************PRINT RMF ESS    INTERVAL REPORT ***************/                                                        
+//STEP03   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,500),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..ESS                       
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(ESS)  
+    SYSID(&SYSID.)                                                      
+    NOSUMMARY                                                           
+/*        
+//*************PRINT RMF CACHE  INTERVAL REPORT ***************/                                                              
+//STEP04   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,500),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CACHE                     
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(CACHE)      
+    SYSID(&SYSID.)                                                 
+    NOSUMMARY                                                           
+/*     
+//*************PRINT RMF DASD   INTERVAL REPORT ***************/                                                                 
+//STEP05   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,500),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..DEVICE                      
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(DEVICE(DASD))                                               
+    NOSUMMARY                                                           
+/*     
+//*************PRINT RMF PAGING   INTERVAL REPORT ***************/                                                                 
+//STEP06   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,50),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..PAGING                      
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(PAGING)                                               
+    NOSUMMARY                                                           
+/*   
+//*************PRINT RMF VSTOR   INTERVAL REPORT ***************/                                                                 
+//STEP07   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,50),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..VSTOR                      
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(VSTOR(S))                                          
+    NOSUMMARY                                                           
+/*  
+//*************PRINT RMF XCF   INTERVAL REPORT ***************/                                                                 
+//STEP08   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPRPTS   DD UNIT=3390,SPACE=(CYL,(100,500),RLSE),                      
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..XCF                      
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    REPORTS(XCF)                                          
+    NOSUMMARY                                                           
+/*   
+//*************PRINT RMF WLM    INTERVAL REPORT ***************/                                                               
+//STEP09   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPXSRPTS DD UNIT=3390,                                                
+//            SPACE=(CYL,(200,500),RLSE),                               
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..WKLD                      
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    SYSRPTS(WLMGL(SCPER,WGROUP,POLICY,RCLASS,SCLASS))                   
+    NOSUMMARY                                                           
+/*                        
+//*************PRINT RMF SHARED DASD INTERVAL REPORT ***************/                                              
+//STEP10   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPXSRPTS DD UNIT=3390,                                                
+//            SPACE=(CYL,(200,500),RLSE),                               
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..SDASD                  
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    SYSRPTS(SDEVICE(DASD))                                              
+    NOSUMMARY                                                           
+/*  
+//*************PRINT RMF CF INTERVAL REPORT ***************/                                              
+//STEP11   EXEC PGM=ERBRMFPP,REGION=0M                                  
+//MFPINPUT DD DISP=SHR,DSN=*.SMFSORT.SORTOUT                            
+//PPXSRPTS DD UNIT=3390,                                                
+//            SPACE=(CYL,(200,100),RLSE),                               
+//            DCB=(LRECL=137,RECFM=VBA,BLKSIZE=1693),                   
+//            DISP=(NEW,CATLG,DELETE),                                  
+//            DSN=&USERHLQ..&SYSPLEX..RMFRPT.D&DATETIME..CF                   
+//MFPMSGDS DD   SYSOUT=*                                                
+//SYSOUT   DD   SYSOUT=*                                                
+//SYSIN    DD   *                                                       
+    SYSRPTS(CF)                                              
+    NOSUMMARY                                                           
+/*       
+//
+     SUMMARY(INT)
+     REPORTS(CPU)
+     REPORTS(ESS)
+     REPORTS(CACHE)
+     REPORTS(CHAN)
+     REPORTS(DEVICE)
+     REPORTS(PAGING)
+     REPORTS(VSTOR(S))
+     REPORTS(XCF)
+     SYSRPTS(SDEVICE(DASD))
+     SYSRPTS(WLMGL(SCPER,WGROUP,POLICY,RCLASS,SCLASS))
+     SYSRPTS(CF)

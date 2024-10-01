@@ -1,0 +1,14 @@
+[[12]]. Configure your system so that it is an NTP client of classroom.example.com.
+
+# vim /etc/chrony.conf
+server classroom.example.com
+:x!
+
+# systemctl start chronyd
+# systemctl enable chronyd
+# chronyc sourcestats -v
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

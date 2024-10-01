@@ -1,0 +1,20 @@
+/****************************REXX*************************************/ 
+/* REXX SUBMIT JCL                                                   */ 
+/*********************************************************************/ 
+/* user = USERID() */                                                   
+user = SW3034                                                           
+pgm = IEFBR14                                                           
+/* QUEUE "//"USER"JS  JOB 16560,'BRUCE'," */                            
+QUEUE "//"user"JS  JOB 16560,"user","                                   
+QUEUE "//           MSGCLASS=W,MSGLEVEL=(1,1),"                         
+QUEUE "//           CLASS=W,"                                           
+QUEUE "//           NOTIFY="user                                        
+/* QUEUE "//STEPBR14  EXEC PGM=IEFBR14" */                              
+QUEUE "//STEPBR14  EXEC PGM="pgm                                        
+QUEUE "//SYSPRINT  DD SYSOUT=*"                                         
+QUEUE "$$"                                                              
+O = OUTTRAP("OUTPUT.",,"CONCAT")                                        
+ADDRESS TSO "SUBMIT * END($$)"                                          
+O = OUTTRAP(OFF)                                                        
+/* SAY OUTPUT.2 */                                                      
+RETURN                                                                  

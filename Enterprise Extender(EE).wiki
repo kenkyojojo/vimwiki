@@ -1,0 +1,33 @@
+* Enterprise Extender’s main objective is to carry SNA traffic over an IP network without requiring changes to that network, it must treat the IP network as a particular type of SNA logical connection. 
+* The UDP protocol was chosen as the method of transporting network layer packets (NLPs). 
+UDP packets provide a way to distinguish EE IP traffic from other types of IP traffic because they contain port numbers. The use of port numbers also permits a priority scheme to be implemented independent of the type of service bits, because many routers are able to prioritize traffic based on the received port number. 
+* UDP also has low overhead because it does not concern itself with error recovery or flow control. Recovery and flow control are the responsibility of the EE endpoints (partners). 
+* EE exploits the robust error recovery and congestion flow control algorithms of APPN’s HPR.
+
+There are four categories of definitions needed for VTAM:
+ 1. Start options
+ 2. EE XCA major node
+ 3. Model PU major node definition
+ 4. Switched major node definitions
+ 
+There are three definitions needed for the TCP/IP stack profile:
+ 1. A static VIPA for EE partner communication
+ 2. The IUTSAMEH Device for VTAM-to-TCP/IP communication
+ 3. A port reservation for the EE ports
+
+
+The following benefits of using EE are discussed in this section:
+ * Maintains integrity of SNA data across the IP network
+ * EE can use any IP interface supported by the TCP/IP stack
+ * Connection Network support
+ * Improvements upon LLC2 error handling
+ * EE is an effective replacement of SNA/SNI
+ * Failure protection better than native IP
+ * Failure recovery better than DLSw
+ * Supports multinode persistent sessions (MNPS)
+ * UDP port numbers mapped to transmission priority
+ * Class of Service priority support (COS)
+ * Flow and congestion control
+ * Flexibility and simplification
+ * Support for IPv4 and IPv6 addressing models
+ * Compatibility with IPSec and SNA session-level encryption (SLE)

@@ -1,0 +1,10 @@
+17. Find all lines in the file /usr/share/mime/packages/freedesktop.org.xml that contain the string ich.
+     Put a copy of all these lines in the original order in the file /root/lines.
+     /root/lines should contain no empty lines and all lines must be exact copies of the original lines in /usr/share/mime/packages/freedesktop.org.xml.
+
+# grep ich /usr/share/mime/packages/freedesktop.org.xml > /root/lines
+
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

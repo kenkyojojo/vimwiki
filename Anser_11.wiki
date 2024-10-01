@@ -1,0 +1,26 @@
+11.  The system classroom.example.com provides an LDAP authentication service.
+     Your system should bind to this service as follows(this is for desktop[VM alias] configuration):
+     The base DN for the authentication service is dc=example,dc=com.
+     LDAP is used to provide both account information and authentication information.
+     The connection should be encrypted using the certificate at http://classroom/pub/example-ca.crt.
+     When properly configured, ldapuserX should be able to log into your system,
+     but will not have a home directory until you have completed the autofs requirement.
+     ldapuserX's password is password.
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/authconfig-ldap#authconfig-ldap-cmd
+    
+# yum -y install sssd authconfig-gtk krb5-workstation
+# systemctl isolate graphical.target  #switch to ‘runlevel 5′
+# system-config-authentication
+Use account database: LDAP
+LDAP search base DN : dc=example,dc=com
+LDAP server : ldap://classroom.example.com
+Use TLS to encrypt connections box is checked
+then click the Download CA Certificate,Enter the CA URL
+Authentication method : LDAP password
+
+use authconfig command
+authconfig --enableldap --enableldapauth --ldapserver=ldap://centos77.com.tw:389 --ldapbasedn="dc=centos,dc=com,dc=tw" --enableldaptls --ldaploadcacert=https://ca.server.example.com/caCert.crt --update
+==================================================================
+GO back the Question
+[[RHCE7_Question]]
+

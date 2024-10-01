@@ -1,5 +1,5 @@
 *[[index|首頁]]*
-test
+
 =My Wiki=
 *[[Target]]* 
 

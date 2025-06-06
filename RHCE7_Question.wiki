@@ -19,6 +19,6 @@ Question:
 16. [[Anser_16]] Revisit     Done     Locate files
 17. [[Anser_17]] Revisit     Done     Find a string
 18. [[Anser_18]] Revisit     Done     Create an archive
-[[19]]. [[Anser_19]] Revisit     Done     Create a new logical volume 
+19. [[Anser_19]] Revisit     Done     Create a new logical volume 
 ================================================================================
 *[[RHCE7_Anser| About the Anser to EX200]]*
